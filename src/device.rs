@@ -609,9 +609,9 @@ impl Device
         self.pretty_print_bit_variables();
         eprintln!("MEMORY USAGE");
         eprintln!("{:->36}","");
-        eprintln!("{: ^11}|{: ^12}", "MEMORY", "BITS USED");
+        eprintln!("{: ^11}|{}", "MEMORY", "BITS USED");
         let (input_memory, flags, execution_memory) = self.count_touched_memory();
-        eprintln!("{:->12}{:->13}", "+", "");
+        eprintln!("{:->12}{:->24}", "+", "");
         eprintln!("{: ^11}| {}",  "INPUT", input_memory);
         eprintln!("{: ^11}| {}",  "EXECUTION", flags + execution_memory);
     }
