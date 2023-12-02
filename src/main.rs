@@ -7,7 +7,7 @@ fn main() {
 
     // println!("\n---\nFinal modified register values:\n---");
 
-    device.read_program("examples/pal-add.asm");
+    device.read_program("examples/add.asm");
 
     for j in 1..=24
     {
@@ -17,9 +17,10 @@ fn main() {
         device.load_input_variable("i01", 1);
         device.load_input_variable("i02", i);
         device.execute_program(None);
-        let (touched_flags, touched_registers) = device.count_touched_memory();
-        println!("{},{}", Variable::u32_to_bits(i).len(), touched_flags + touched_registers);
+        let (input_used, touched_flags, touched_registers) = device.count_touched_memory();
+        println!("{},{},{}", Variable::u32_to_bits(i).len(), input_used, touched_flags + touched_registers);
     }
+    device.pretty_print_memory();
     // device.load_input_variable("i00", 12);
     //     device.load_input_variable("i01", 15);
     // device.execute_program(None);
