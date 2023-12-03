@@ -1,0 +1,3 @@
+[submodule "writeup/ebla-tex"]
+	path = writeup/ebla-tex
+	url = git@github.com:ellifteria/ebla-tex

@@ -543,6 +543,12 @@ impl Device
     }
 
     #[allow(dead_code)]
+    pub fn clear_device_inputs(&mut self)
+    {
+        self.input_variables = Vec::<Variable>::new();
+    }
+
+    #[allow(dead_code)]
     pub fn count_touched_memory(&mut self) -> (usize, usize, usize)
     {
         let input_space_used: &usize = &self.input_variables.clone()

@@ -2,9 +2,10 @@ using Plots, CSV, DataFrames
 theme(:wong)
 
 data_files = [
-	("/Users/elliberes/nu-cs/CS-335/s2mvm/output/add.csv", "ADD (LSPACE algorithm)"),
-	("/Users/elliberes/nu-cs/CS-335/s2mvm/output/lin-add.csv", "ADD (linear algorithm)"),
-	("/Users/elliberes/nu-cs/CS-335/s2mvm/output/pal-add.csv", "PAL-ADD (LSPACE algorithm)")
+	("./output/add.csv", "ADD (LSPACE algorithm)"),
+	("./output/lin-add.csv", "ADD (linear algorithm)"),
+	("./output/pal-add.csv", "PAL-ADD"),
+	("./output/pal.csv", "PAL"),
 ]
 
 for file in data_files
@@ -20,7 +21,7 @@ for file in data_files
 	plot!(add_data[!, 1], add_data[!, 3], seriestype="scatter")
 	plot!(legend=false)
 	plot!(ylabel="Execution-time memory used (bits)")
-	plot!(title="ADD (LSPACE algorithm)")
+	plot!(title=title)
 
 	p22 = plot(add_data[!, 1], add_data[!, 3])
 	plot!(add_data[!, 1], add_data[!, 3], seriestype="scatter")
@@ -30,5 +31,5 @@ for file in data_files
 	
 	plot(p21, p22, layout=(1,2), legend=false, plotdensity=10000, dpi=600)
 	plot!(xlabel="Input length (bits)")
-	png("analysis/" * replace(title, " " => "-"))
+	png("writeup/analysis/" * replace(title, " " => "-"))
 end
