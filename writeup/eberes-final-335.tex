@@ -88,7 +88,7 @@ For one, there is often no way to separate the size of the input from the amount
 Additionally, since, in most languages, values are stored in variables with constant sizes—for example, \lstinline|u32|s in Rust—the memory usage of the code will depend not on the size of the inputs, but instead on the size of the variables chosen.
 This makes measuring space complexity a much more challenging endeavor than measuring time complexity despite its value for understanding the execution-time requirements of algorithms and for teaching theoretical computer science.
 
-Therefore, I present Munin, a tool for measuring the space complexity of algorithms.
+Therefore, I present Munin, a tool for measuring the execution-time space complexity of algorithms.
 Munin works by separating inputs from the rest of its memory and by storing values in raw bit-vectors, enabling it to easily measure the exact number of bits used by an algorithm during its execution.
 
 Here, I describe Munin and use it to analyze the space complexity of four algorithms:
