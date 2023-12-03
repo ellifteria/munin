@@ -52,7 +52,7 @@ sh install.sh
 Munin uses three types of variables:
 
 | Type | Restrictions | Prefix | Example (first available variable)
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | Variable | Can be read and written in the `INPUT` and `EXECUTION` phases; are cleared upon entering the `EXECUTION` phase | `v` | `v0` |
 | Bit | Are only one bit in size; can be read and written in the `INPUT` and `EXECUTION` phases; are cleared upon entering the `EXECUTION` phase | `b` | `b0` |
 | Input | Can be read and written in the `INPUT` phase; can only be read in the `EXECUTION` phase | `i` | `i0` |
