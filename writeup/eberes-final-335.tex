@@ -125,7 +125,7 @@ This allows Munin to separate the input and execution-time memory usage, allowin
 Once a program has finished execution, the device can count up the total number and size of variables to determine how much space was used by the program; the sizes or variables are determined by the maximum number of bits that were stored in the variable throughout program execution.
 
 By separating memory in this way, Munin can separately determine the size of the inputs and write memory.
-Since all variables are either single bits or are vectors of bits—instead of constant-sized values such as \lstinline|u32|s in Rust—Munin is able to count exactly the number of bits required by algorithms without the overhead required by other programming languages.
+Since all variables are either a bit or a vector of bits—as opposed to being constant-sized values such as \lstinline|u32|s in Rust—Munin is able to count exactly the number of bits required by algorithms without the overhead required by other programming languages.
 
 \section{Space complexity analysis using Munin}
 
