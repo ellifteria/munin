@@ -568,7 +568,7 @@ impl Device
     #[allow(dead_code)]
     pub fn pretty_print_variables(&mut self)
     {
-        Self::pretty_print_header("VARIABLE");
+        Self::pretty_print_header(" VARIABLE");
         for i in 0..self.write_variables.len()
         {
             let variable = self.write_variables[i].clone();
@@ -580,7 +580,7 @@ impl Device
     #[allow(dead_code)]
     pub fn pretty_print_bit_variables(&mut self)
     {
-        Self::pretty_print_header("BIT");
+        Self::pretty_print_header(" BIT");
         for i in 0..self.write_bits.len()
         {
             let variable = self.write_bits[i].clone();
@@ -592,7 +592,7 @@ impl Device
     #[allow(dead_code)]
     pub fn pretty_print_input_variables(&mut self)
     {
-        Self::pretty_print_header("INPUT");
+        Self::pretty_print_header(" INPUT");
         for i in 0..self.input_variables.len()
         {
             let variable = self.input_variables[i].clone();
@@ -607,7 +607,7 @@ impl Device
         self.pretty_print_input_variables();
         self.pretty_print_variables();
         self.pretty_print_bit_variables();
-        eprintln!("MEMORY USAGE");
+        eprintln!(" MEMORY USAGE");
         eprintln!("{:->36}","");
         eprintln!("{: ^11}|{}", "MEMORY", "BITS USED");
         let (input_memory, flags, execution_memory) = self.count_touched_memory();
