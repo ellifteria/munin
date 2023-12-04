@@ -150,7 +150,7 @@ Running this through Munin gives the following output:
  16           | 22      
 \end{lstlisting}
 
-Plotting this shows gives the following; note that the left plot uses a linear scale for both the x- and y-axis and the right plot uses a linear scale for the y-axis and a logarithmic scale for the x-axis (this convention will be followed for all plots in this section):
+Plotting this shows the following; note that the left plot uses a linear scale for both the x- and y-axis and the right plot uses a linear scale for the y-axis and a logarithmic scale for the x-axis (this convention will be followed for all plots in this section):
 
 \begin{figure}[H]
     \centering
@@ -249,7 +249,7 @@ The output and plot of running PAL-ADD through Munin is the following:
     \label{fig:palAdd}
 \end{figure}
 
-This demonstrates that PAL-ADD runs in LSPACE.
+Likewise, this demonstrates that PAL-ADD runs in LSPACE.
 
 \section{Discussion}
 
@@ -432,19 +432,18 @@ Note: it is assumed that the \lstinline|carry_flag| is set automatically when bi
 \subsection{ADD}
 
 \begin{theorem} \label{thrm:add}
-    \(\text{ADD} = \{\langle x, y \rangle : x + y = z\} \in L\)
+    \(\text{ADD} = \{\langle x, y, z \rangle : x + y = z\} \in L\)
 \end{theorem}
 
 \begin{proof}
     Let \(x, y, z\) be arbitrary binary integers.
-    I want to show that it determines if \(x + y = z\) in LOG-SPACE.
+    Here, it will be shown that if \(x + y = z\) can be decided in LOG-SPACE.
 
     Consider the ADD algorithm given in Appendix \ref{app:lAdd}.
 
     This algorithm determines if the sum of two binary integers \(x, y\) is a third binary integer \(z\).
 
-    I will now show that it does so in LOG-SPACE.
-    Consider the variables used by \lstinline|add|.
+    To show that it does so in LOG-SPACE, consider the variables used by \lstinline|add|.
     There are \(8\) such variables.
     \lstinline|x_bit|, \lstinline|y_bit|, \lstinline|z_bit|, and \lstinline|carry_flag| are all just a single bit each.
     \lstinline|len_x|, \lstinline|len_y|, \lstinline|len_z|, and \lstinline|i| can all hold values between \(0\) and \(n = max(n_x, n_y, n_z)\) where \(n_x, n_y, n_z\) are the sizes of \(x, y, z\) respectively in bits.
@@ -454,7 +453,7 @@ Note: it is assumed that the \lstinline|carry_flag| is set automatically when bi
     Therefore, whether or not \(x + y = z\) can be decided in LOG-SPACE.
     Because \(x, y, z\) are arbitrary this is the case for any binary integers.
     
-    Thus, \(\text{ADD} = \{\langle x, y \rangle : x + y = z\} \in L\).
+    Thus, \(\text{ADD} = \{\langle x, y, z \rangle : x + y = z\} \in L\).
 \end{proof}
 
 \subsection{PAL-ADD}
@@ -465,14 +464,13 @@ Note: it is assumed that the \lstinline|carry_flag| is set automatically when bi
 
 \begin{proof}
     Let \(x, y\) be arbitrary binary integers.
-    I want to show that it determines if \(x + y\) is a palindrome in LOG-SPACE.
+    Here, it will be shown that if \(x + y\) is a palindrome can be decided in LOG-SPACE.
 
     Consider the PAL-ADD algorithm given in Appendix \ref{app:palAdd}.
 
     This algorithm determines if the sum of two binary integers is a palindrome.
 
-    I will now show that it does so in LOG-SPACE.
-    Consider the variables used by \lstinline|pal_add|.
+    To show that it does so in LOG-SPACE, consider the variables used by \lstinline|pal_add|.
     There are \(7\) such variables.
     \lstinline|i_bit|, \lstinline|j_bit|, and \lstinline|carry_on_last| are all just a single bit each.
     \lstinline|len|, \lstinline|len_tmp|, \lstinline|i|, and \lstinline|j| can all hold values between \(0\) and \(n = max(n_x, n_y)\) where \(n_x, n_y\) are the sizes of \(x, y\) respectively in bits.
