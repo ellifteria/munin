@@ -1,0 +1,10 @@
+set v0 to length-of i0
+set v1 to 0
+set v2 to 1
+declare-jump-point loop
+bit-add 1 to v2
+int-add 1 to v1
+compare v1 to v0
+skip-next-if greater-or-equal
+go-to loop
+set b0 to v2
