@@ -1,3 +1,5 @@
+use munin_compiler::Compiler;
+
 use clap::Parser;
 
 use munin_device::{
@@ -178,28 +180,19 @@ struct Args {
     file: String,
 
     // Inputs
-    #[arg(short, long, num_args(0..))]
-    input: Vec<u32>
+    #[arg(short, long)]
+    output: String
 }
 
 fn main() {
     let args: Args = Args::parse();
-    let inputs = args.input;
+    let output_path = args.output;
     let file_path = args.file;
 
-    let mut device = Device::new();
+    let mut compiler = Compiler::new();
 
-    let mut index: u32 = 0;
-    for input in inputs
-    {
-        device.load_input_variable(&format!("i{index}"), input);
-        index += 1;
-    }
+    compiler.load_file(file_path);
 
-    device.load_program(file_path);
-
-    device.execute_program(None);
-
-    device.pretty_print_memory();
+    compiler.compile_program(&output_path);
 
 }

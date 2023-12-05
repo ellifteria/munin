@@ -13,12 +13,10 @@ set v01 0
 set-to-nth-bit v02 i00 v01
 set-to-nth-bit v03 i01 v01
 set-to-nth-bit v04 i02 v01
-jump-over-next-if no-carry
-bit-add v02 1
-bit-add v02 v03
+bit-add-with-carry v02 v03
 compare v04 v02
 jump-over-next-if not-equal
-jump-to 23
+jump-to 21
 set b00 0
 end
 int-add v01 1

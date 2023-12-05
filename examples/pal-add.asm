@@ -12,14 +12,14 @@ jump-to 30
 set v07 0
 set v08 v06
 set v09 0
-jump-to 47
+jump-to 45
 set v13 v09
 set v08 v00
 int-subtract v08 v06
 int-subtract v08 1
 int-add v08 v02
 set v07 1
-jump-to 47
+jump-to 45
 set v14 v09
 compare v13 v14
 jump-over-next-if not-equal
@@ -33,9 +33,7 @@ end
 set v03 0
 set-to-nth-bit v04 i00 v03
 set-to-nth-bit v05 i01 v03
-jump-over-next-if no-carry
-bit-add v04 1
-bit-add v04 v05
+bit-add-with-carry v04 v05
 int-add v03 1
 compare v03 v00
 jump-over-next-if greater-or-equal
@@ -49,13 +47,11 @@ clear-flags
 set v10 0
 set-to-nth-bit v11 i00 v10
 set-to-nth-bit v12 i01 v10
-jump-over-next-if no-carry
-bit-add v11 1
-bit-add v11 v12
+bit-add-with-carry v11 v12
 int-add v10 1
 compare v10 v08
 jump-over-next-if greater
-jump-to 49
+jump-to 47
 set v09 v11
 compare v07 0
 jump-over-next-if not-equal
