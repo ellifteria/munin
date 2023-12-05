@@ -71,15 +71,15 @@ Conditions are the following:
 
 | Condition | Meaning | Flags |
 | --- | --- | --- |
-| `equal` | Equal | `e` |
+| `e` | Equal | `EQUAL` |
 | `ne` | Not equal | `!EQUAL` |
-| `greater` | Greater than | `GREATER` |
+| `g` | Greater than | `GREATER` |
 | `ge` | Greater than or equal to | `GREATER ^ EQUAL` |
-| `less` | Less than | `!EQUAL & !GREATER` |
+| `l` | Less than | `!EQUAL & !GREATER` |
 | `le` | Less than or equal to | `!GREATER` |
 | `c` | Carry | `CARRY` |
 | `nc` | No carry | `!CARRY` |
-| `underflow` | Underflow | `UNDERFLOW` |
+| `u` | Underflow | `UNDERFLOW` |
 | `nu` | No underflow | `!UNDERFLOW` |
 
 
