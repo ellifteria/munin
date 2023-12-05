@@ -43,8 +43,8 @@ sh install.sh
 | `bsl` | `D` | `S` | | Sets variable D equal to the value of D >> S |
 | `cmp` | `A` | `B` | | Sets the equal flag if A == B ; sets the greater flag if A > B |
 | `clf` | | | | Clears all flags |
-| `jmp` | `L` | | | Jumps to line L |
-| `jon` | `C` | | | Jumps over the next instruction if the condition C is true |
+| `jmp` | `less` | | | Jumps to line less |
+| `jon` | `c` | | | Jumps over the next instruction if the condition c is true |
 | `end` | | | | Ends the program |
 
 ### Variables

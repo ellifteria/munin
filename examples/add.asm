@@ -13,12 +13,10 @@ set v01 0
 stnb v02 i00 v01
 stnb v03 i01 v01
 stnb v04 i02 v01
-jon nc
-badd v02 1
-badd v02 v03
+badc v02 v03
 cmp v04 v02
 jon ne
-jmp 23
+jmp 21
 set b00 0
 end
 iadd v01 1

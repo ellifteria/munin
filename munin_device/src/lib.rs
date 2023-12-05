@@ -277,6 +277,7 @@ impl Device
         instruction_parts.push("");
         instruction_parts.push("");
         instruction_parts.push("");
+        instruction_parts.push("");
         let operator: &str = instruction_parts[0].trim();
         let operand1: &str = instruction_parts[1].trim();
         let operand2: &str = instruction_parts[2].trim();
@@ -358,6 +359,34 @@ impl Device
                     panic!("Invalid value for binary addition: {} at {}", destination, operand1);
                 }
 
+                let mut new_value: u32 = source + destination;
+
+                self.flags[CARRY_FLAG] = new_value >= 2;
+
+                if self.flags[CARRY_FLAG]
+                {
+                    new_value -= 2;
+                }
+
+                self.set_destination(operand1, new_value);
+            }
+            "badc" =>
+            {
+                let source: u32 = self.get_source_value(operand2);
+
+                if source > 1
+                {
+                    panic!("Invalid value for binary addition: {} at {}", source, operand2);
+                }
+
+                let destination: u32 = self.get_source_value(operand1);
+
+
+                if destination > 1
+                {
+                    panic!("Invalid value for binary addition: {} at {}", destination, operand1);
+                }
+
                 let mut new_value: u32 = source + destination + (self.flags[CARRY_FLAG] as u32);
 
                 self.flags[CARRY_FLAG] = new_value >= 2;
@@ -386,7 +415,7 @@ impl Device
                     panic!("Invalid value for binary addition: {} at {}", destination, operand1);
                 }
 
-                let mut new_value: i32 = (source as i32) -  (destination as i32) - (self.flags[UNDERFLOW_FLAG] as i32);
+                let mut new_value: i32 = (source as i32) -  (destination as i32);
 
                 self.flags[UNDERFLOW_FLAG] =  new_value < 0;
 
@@ -456,6 +485,7 @@ impl Device
             {
                 self.program_running = false;
             }
+            "do-nothing"=>{}
             _other =>
             {
                 panic!("Unknown operator: {}", operator);
@@ -468,7 +498,7 @@ impl Device
 
     }
 
-    pub fn read_program(&mut self, file_path: impl AsRef<Path>)
+    pub fn load_program(&mut self, file_path: impl AsRef<Path>)
     {
         let file: File = File::open(file_path).expect("Could not open file");
         let io_file_lines:io::Result<Vec<String>> = BufReader::new(file).lines().collect();

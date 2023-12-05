@@ -173,33 +173,55 @@ fn memory_profile_pal(pretty_print_values: bool)
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-    /// File to run
+    /// Algorithm to profile
     #[arg(short, long)]
-    file: String,
+    algorithm: u32,
 
-    // Inputs
-    #[arg(short, long, num_args(0..))]
-    input: Vec<u32>
+    // 1 if pretty printing values; else 0
+    #[arg(short, long, default_value_t=0)]
+    pretty_print_values: u32
 }
 
 fn main() {
     let args: Args = Args::parse();
-    let inputs = args.input;
-    let file_path = args.file;
 
-    let mut device = Device::new();
+    let pretty_print_values: bool = args.pretty_print_values == 1;
 
-    let mut index: u32 = 0;
-    for input in inputs
+    let algorithm = args.algorithm;
+    match &algorithm
     {
-        device.load_input_variable(&format!("i{index}"), input);
-        index += 1;
+        0 =>
+        {
+            eprintln!("\n{:->36}","");
+            eprintln!(" COMPLEXITY ANALYSIS OF ADD");
+            eprintln!("{:->36}","");
+            memory_profile_add(pretty_print_values);
+        }
+        1 =>
+        {
+            eprintln!("\n{:->36}","");
+            eprintln!(" COMPLEXITY ANALYSIS OF PAL-ADD");
+            eprintln!("{:->36}","");
+            memory_profile_pal_add(pretty_print_values);
+        }
+        2 =>
+        {
+            eprintln!("\n{:->36}","");
+            eprintln!(" COMPLEXITY ANALYSIS OF LIN-ADD");
+            eprintln!("{:->36}","");
+            memory_profile_lin_add(pretty_print_values);
+        }
+        3 =>
+        {
+            eprintln!("\n{:->36}","");
+            eprintln!(" COMPLEXITY ANALYSIS OF PAL");
+            eprintln!("{:->36}","");
+            memory_profile_pal(pretty_print_values);
+        }
+        _other=>
+        {
+            println!();
+            eprintln!("Unknown algorithm: {}", &algorithm)
+        }
     }
-
-    device.load_program(file_path);
-
-    device.execute_program(None);
-
-    device.pretty_print_memory();
-
 }

@@ -12,14 +12,14 @@ jmp 30
 set v07 0
 set v08 v06
 set v09 0
-jmp 47
+jmp 45
 set v13 v09
 set v08 v00
 isub v08 v06
 isub v08 1
 iadd v08 v02
 set v07 1
-jmp 47
+jmp 45
 set v14 v09
 cmp v13 v14
 jon ne
@@ -33,9 +33,7 @@ end
 set v03 0
 stnb v04 i00 v03
 stnb v05 i01 v03
-jon nc
-badd v04 1
-badd v04 v05
+badc v04 v05
 iadd v03 1
 cmp v03 v00
 jon ge
@@ -49,13 +47,11 @@ clf
 set v10 0
 stnb v11 i00 v10
 stnb v12 i01 v10
-jon nc
-badd v11 1
-badd v11 v12
+badc v11 v12
 iadd v10 1
 cmp v10 v08
 jon g
-jmp 49
+jmp 47
 set v09 v11
 cmp v07 0
 jon ne
