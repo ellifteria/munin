@@ -1,9 +1,9 @@
 set v0 i0
 set v1 i1
 set v2 i2
-int-add v0 v1
+iadd v0 v1
 set b0 0
-compare v0 v2
-jump-over-next-if not-equal
+cmp v0 v2
+jon ne
 set b0 1
 end

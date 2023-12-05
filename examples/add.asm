@@ -1,27 +1,27 @@
-set-to-length-of v00 i02
-set-to-length-of v01 i00
-compare v01 v00
-jump-over-next-if greater
-jump-to 7
+stl v00 i02
+stl v01 i00
+cmp v01 v00
+jon g
+jmp 7
 set b00 0
 end
-set-to-length-of v01 i01
-compare v01 v00
-jump-over-next-if less-or-equal
-jump-to 5
+stl v01 i01
+cmp v01 v00
+jon le
+jmp 5
 set v01 0
-set-to-nth-bit v02 i00 v01
-set-to-nth-bit v03 i01 v01
-set-to-nth-bit v04 i02 v01
-bit-add-with-carry v02 v03
-compare v04 v02
-jump-over-next-if not-equal
-jump-to 21
+stnb v02 i00 v01
+stnb v03 i01 v01
+stnb v04 i02 v01
+badc v02 v03
+cmp v04 v02
+jon ne
+jmp 21
 set b00 0
 end
-int-add v01 1
-compare v01 v00
-jump-over-next-if greater-or-equal
-jump-to 12
+iadd v01 1
+cmp v01 v00
+jon ge
+jmp 12
 set b00 1
 end

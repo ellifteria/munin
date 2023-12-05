@@ -96,13 +96,13 @@ impl Compiler
                         "length-of" =>
                         {
                             let true_source = tokens[4];
-                            format!("set-to-length-of {destination} {true_source}")
+                            format!("stl {destination} {true_source}")
                         }
                         "bit" =>
                         {
                             let bit = tokens[4];
                             let true_source = tokens[6];
-                            format!("set-to-nth-bit {destination} {true_source} {bit}")
+                            format!("stnb {destination} {true_source} {bit}")
                         }
                         _other =>
                         {
@@ -114,13 +114,13 @@ impl Compiler
                 {
                     let destination = tokens[3];
                     let source = tokens[1];
-                    format!("int-add {destination} {source}")
+                    format!("iadd {destination} {source}")
                 }
                 "int-subtract" =>
                 { 
                     let destination = tokens[3];
                     let source = tokens[1];
-                    format!("int-subtract {destination} {source}") 
+                    format!("isub {destination} {source}") 
                 }
                 "bit-add" =>
                 {
@@ -130,11 +130,11 @@ impl Compiler
                     match carry {
                         "with-carry" =>
                         {
-                            format!("bit-add-with-carry {destination} {source}")
+                            format!("badc {destination} {source}")
                         }
                         _other =>
                         {
-                            format!("bit-add {destination} {source}")
+                            format!("badd {destination} {source}")
                         }
                     }
                 }
@@ -142,30 +142,48 @@ impl Compiler
                 {
                     let destination = tokens[3];
                     let source = tokens[1];
-                    format!("bit-subtract {destination} {source}")
+                    format!("bsub {destination} {source}")
                 }
                 "shift"=>
                 {
                     let destination = tokens[1];
-                    let direction = tokens[2];
+                    let direction = tokens[2].chars().next().unwrap();
                     let by = tokens[4];
-                    format!("bit-shift-{direction} {destination} {by}")
+                    format!("bs{direction} {destination} {by}")
                 }
                 "go-to" =>
                 {
                     let line_number: &usize = self.jump_points.get(tokens[1]).unwrap();
-                    format!("jump-to {line_number}")
+                    format!("jmp {line_number}")
                 }
                 "compare" =>
                 {
                     let a = tokens[1];
                     let b = tokens[3];
-                    format!("compare {a} {b}")
+                    format!("cmp {a} {b}")
+                }
+                "clear-flags" =>
+                {
+                    "clf".to_string()
                 }
                 "skip-next-if" =>
                 {
-                    let flag = tokens[1];
-                    format!("jump-over-next-if {flag}")
+                    let flag = match tokens[1]
+                    {
+                        "equal" => {"e"}
+                        "not-equal" => {"ne"}
+                        "greater" => {"g"}
+                        "greater-or-equal" => {"ge"}
+                        "less" => {"l"}
+                        "less-or-equal" => {"le"}
+                        "carry" => {"c"}
+                        "no-carry" => {"nc"}
+                        "underflow" => {"u"}
+                        "no-underflow" => {"nu"}
+                        "" => {""}
+                        _other => panic!("Invalid flag: {}", tokens[1])
+                    };
+                    format!("jon {flag}")
                 }
                 _other =>
                 {
