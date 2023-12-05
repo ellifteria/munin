@@ -41,6 +41,31 @@ impl Compiler
         let mut f = BufWriter::new(f);
 
         const MAX_NUM_TOKENS: usize = 8;
+
+        for line_number in 0..self.program_lines.len()
+        {
+            let line = &self.program_lines.get(line_number).unwrap();
+
+            let mut tokens: Vec<&str> = line.split_whitespace()
+                .collect::<Vec<&str>>();
+    
+            // push empty values to ensure have tokens
+            for _ in 0..MAX_NUM_TOKENS
+            {
+                tokens.push("");
+            }
+
+            match tokens[0]
+            {
+                "declare-jump-point" =>
+                {
+                    let name = tokens[1];
+                    self.jump_points.insert(name.to_owned(), line_number);
+                }
+                _other =>{}
+            };
+        }
+
         for line_number in 0..self.program_lines.len()
         {
             let line = &self.program_lines.get(line_number).unwrap();
@@ -56,11 +81,11 @@ impl Compiler
     
             let asm_code: String = match tokens[0]
             {
-                ""=>{"do-nothing".to_string()}
+                ""=>{
+                    "do-nothing".to_string()
+                }
                 "declare-jump-point" =>
                 {
-                    let name = tokens[1];
-                    self.jump_points.insert(name.to_owned(), line_number);
                     "do-nothing".to_string()
                 }
                 "set" =>
