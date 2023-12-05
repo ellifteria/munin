@@ -137,25 +137,25 @@ impl Device
         match condition
         {
             // equal to
-            "e" => {self.flags[EQUAL_FLAG]}
+            "equal" => {self.flags[EQUAL_FLAG]}
             // not equal to
-            "ne" => {!self.flags[EQUAL_FLAG]}
+            "not-equal" => {!self.flags[EQUAL_FLAG]}
             // greater than
-            "g" => {self.flags[GREATER_FLAG]}
+            "greater" => {self.flags[GREATER_FLAG]}
             // greater than or equal to
-            "ge" => {self.flags[EQUAL_FLAG] || self.flags[GREATER_FLAG]}
+            "greater-or-equal" => {self.flags[EQUAL_FLAG] || self.flags[GREATER_FLAG]}
             // less than
-            "l" => {!self.flags[GREATER_FLAG] && !self.flags[EQUAL_FLAG]}
+            "less" => {!self.flags[GREATER_FLAG] && !self.flags[EQUAL_FLAG]}
             // less than or equal to
-            "le" => {!self.flags[GREATER_FLAG]}
+            "less-or-equal" => {!self.flags[GREATER_FLAG]}
             // carry
-            "c" => {self.flags[CARRY_FLAG]}
+            "carry" => {self.flags[CARRY_FLAG]}
             // no carry
-            "nc" => {!self.flags[CARRY_FLAG]}
+            "no-carry" => {!self.flags[CARRY_FLAG]}
             // underflow
-            "u" => {self.flags[UNDERFLOW_FLAG]}
+            "underflow" => {self.flags[UNDERFLOW_FLAG]}
             // no underflow
-            "nu" => {!self.flags[UNDERFLOW_FLAG]}
+            "no-underflow" => {!self.flags[UNDERFLOW_FLAG]}
             // no flag, always perform
             "" => {true}
             _ => panic!("Invalid condition: {}", condition)
@@ -293,14 +293,14 @@ impl Device
 
                 self.set_destination(operand1, source);
             }
-            "stl" =>
+            "set-to-length-of" =>
             {
                 let source: u32 = self.get_source_value(operand2);
                 let source_length: usize = Variable::u32_to_bits(source).len();
 
                 self.set_destination(operand1, source_length as u32);
             }
-            "stnb" =>
+            "set-to-nth-bit" =>
             {
                 let source: u32 = self.get_source_value(operand2);
                 
@@ -320,7 +320,7 @@ impl Device
                 self.set_destination(operand1, nth_bit);
             }
             // INTEGER OPERATION OPERATORS
-            "iadd" =>
+            "int-add" =>
             {
                 let source: u32 = self.get_source_value(operand2);
 
@@ -330,7 +330,7 @@ impl Device
 
                 self.set_destination(operand1, new_value); 
             }
-            "isub" =>
+            "int-subtract" =>
             {
                 let source: u32 = self.get_source_value(operand2);
 
@@ -341,7 +341,7 @@ impl Device
                 self.set_destination(operand1, new_value); 
             }
             // BINARY OPERATION OPERATORS
-            "badd" =>
+            "bit-add" =>
             {
                 let source: u32 = self.get_source_value(operand2);
 
@@ -369,7 +369,7 @@ impl Device
 
                 self.set_destination(operand1, new_value);
             }
-            "bsub" =>
+            "bit-subtract" =>
             {
                 let source: u32 = self.get_source_value(operand2);
 
@@ -398,7 +398,7 @@ impl Device
 
                 self.set_destination(operand1, new_value as u32);
             }
-            "bsr" =>
+            "bit-shift-right" =>
             {
                 let source: u32 = self.get_source_value(operand2);
 
@@ -408,7 +408,7 @@ impl Device
 
                 self.set_destination(operand1, new_value); 
             }
-            "bsl" =>
+            "bit-shift-left" =>
             {
                 let source: u32 = self.get_source_value(operand2);
 
@@ -419,14 +419,14 @@ impl Device
                 self.set_destination(operand1, new_value); 
             }
             // COMPARISON OPERATORS
-            "clf" =>
+            "clear-flags" =>
             {
                 for flag in 0..NUM_FLAGS
                 {
                     self.flags[flag] = false;
                 }
             }
-            "cmp" =>
+            "compare" =>
             {
                 let a_value: u32 = self.get_source_value(operand1);
                 let b_value: u32 = self.get_source_value(operand2);
@@ -436,13 +436,13 @@ impl Device
                 self.flags[GREATER_FLAG] = a_value > b_value;
             }
             // PROGRAM FLOW OPERATORS
-            "jmp" =>
+            "jump-to" =>
             {
                 let program_line: u32 = self.get_source_value(operand1);
                 self.instruction_pointer = program_line as usize;
                 increment_instruction_pointer = false;
             }
-            "jon" =>
+            "jump-over-next-if" =>
             {
                 if !self.check_flow_condition(operand1)
                 {

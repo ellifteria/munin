@@ -33,18 +33,18 @@ sh install.sh
 | Operator | Operand 1 | Operand 2 | Operand 3 | Description |
 | --- | --- | --- | --- | --- |
 | `set` | `D` | `S` | | Sets variable D equal to the value of S |
-| `stl` | `D` | `S` | | Sets variable D equal to the length of S |
-| `stnb` | `D` | `S` | `N` | Sets variable D equal to the Nth bit of S |
-| `iadd` | `D` | `S` | | Sets variable D equal to the value of D + S |
-| `isub` | `D` | `S` | | Sets variable D equal to the value of D - S |
-| `badd` | `D` | `S` | | Sets one-bit variable D equal to the value of the binary sum of one-bit D and one-bit S; sets carry flag |
-| `bsub` | `D` | `S` | | Sets one-bit variable D equal to the value of the binary subtraction of one-bit D and one-bit S; sets the underflow flag |
-| `bsr` | `D` | `S` | | Sets variable D equal to the value of D << S |
-| `bsl` | `D` | `S` | | Sets variable D equal to the value of D >> S |
-| `cmp` | `A` | `B` | | Sets the equal flag if A == B ; sets the greater flag if A > B |
-| `clf` | | | | Clears all flags |
-| `jmp` | `L` | | | Jumps to line L |
-| `jon` | `C` | | | Jumps over the next instruction if the condition C is true |
+| `set-to-length-of` | `D` | `S` | | Sets variable D equal to the length of S |
+| `set-to-nth-bit` | `D` | `S` | `N` | Sets variable D equal to the Nth bit of S |
+| `int-add` | `D` | `S` | | Sets variable D equal to the value of D + S |
+| `int-subtract` | `D` | `S` | | Sets variable D equal to the value of D - S |
+| `bit-add` | `D` | `S` | | Sets one-bit variable D equal to the value of the binary sum of one-bit D and one-bit S; sets carry flag |
+| `bit-subtract` | `D` | `S` | | Sets one-bit variable D equal to the value of the binary subtraction of one-bit D and one-bit S; sets the underflow flag |
+| `bit-shift-right` | `D` | `S` | | Sets variable D equal to the value of D << S |
+| `bit-shift-left` | `D` | `S` | | Sets variable D equal to the value of D >> S |
+| `compare` | `A` | `B` | | Sets the equal flag if A == B ; sets the greater flag if A > B |
+| `clear-flags` | | | | Clears all flags |
+| `jump-to` | `less` | | | Jumps to line less |
+| `jump-over-next-if` | `carry` | | | Jumps over the next instruction if the condition carry is true |
 | `end` | | | | Ends the program |
 
 ### Variables
@@ -71,19 +71,19 @@ Conditions are the following:
 
 | Condition | Meaning | Flags |
 | --- | --- | --- |
-| `e` | Equal | `EQUAL` |
-| `ne` | Not equal | `!EQUAL` |
-| `g` | Greater than | `GREATER` |
-| `ge` | Greater than or equal to | `GREATER ^ EQUAL` |
-| `l` | Less than | `!EQUAL & !GREATER` |
-| `le` | Less than or equal to | `!GREATER` |
-| `c` | Carry | `CARRY` |
-| `nc` | No carry | `!CARRY` |
-| `u` | Underflow | `UNDERFLOW` |
-| `nu` | No underflow | `!UNDERFLOW` |
+| `equal` | Equal | `EQUAL` |
+| `not-equal` | Not equal | `!EQUAL` |
+| `greater` | Greater than | `GREATER` |
+| `greater-or-equal` | Greater than or equal to | `GREATER ^ EQUAL` |
+| `less` | Less than | `!EQUAL & !GREATER` |
+| `less-or-equal` | Less than or equal to | `!GREATER` |
+| `carry` | Carry | `CARRY` |
+| `no-carry` | No carry | `!CARRY` |
+| `underflow` | Underflow | `UNDERFLOW` |
+| `no-underflow` | No underflow | `!UNDERFLOW` |
 
 
 ### Program flow
 
-`jmp` operations in Munin jump to line numbers.
+`jump-to` operations in Munin jump to line numbers.
 Line numbers in Munin assembly start at `0`, not `1`.

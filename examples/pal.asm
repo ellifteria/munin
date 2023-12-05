@@ -1,18 +1,18 @@
 set b00 0
-stl v00 i00
+set-to-length-of v00 i00
 set v01 0
-cmp v01 v00
-jon l
-jmp 16
+compare v01 v00
+jump-over-next-if less
+jump-to 16
 set v02 v00
-isub v02 v01
-isub v02 1
-stnb v03 i00 v01
-stnb v04 i00 v02
-cmp v03 v04
-jon e
+int-subtract v02 v01
+int-subtract v02 1
+set-to-nth-bit v03 i00 v01
+set-to-nth-bit v04 i00 v02
+compare v03 v04
+jump-over-next-if equal
 end
-iadd v01 1
-jmp 3
+int-add v01 1
+jump-to 3
 set b00 1
 end
