@@ -32,19 +32,19 @@ sh install.sh
 
 | Operator | Operand 1 | Operand 2 | Operand 3 | Description |
 | --- | --- | --- | --- | --- |
-| `set` | `D` | `S` | | Sets variable D equal to the value of S |
-| `stl` | `D` | `S` | | Sets variable D equal to the length of S |
-| `stnb` | `D` | `S` | `N` | Sets variable D equal to the Nth bit of S |
-| `iadd` | `D` | `S` | | Sets variable D equal to the value of D + S |
-| `isub` | `D` | `S` | | Sets variable D equal to the value of D - S |
-| `badd` | `D` | `S` | | Sets one-bit variable D equal to the value of the binary sum of one-bit D and one-bit S; sets carry flag |
-| `bsub` | `D` | `S` | | Sets one-bit variable D equal to the value of the binary subtraction of one-bit D and one-bit S; sets the underflow flag |
-| `bsr` | `D` | `S` | | Sets variable D equal to the value of D << S |
-| `bsl` | `D` | `S` | | Sets variable D equal to the value of D >> S |
-| `cmp` | `A` | `B` | | Sets the equal flag if A == B ; sets the greater flag if A > B |
+| `set` | `D` | `S` | | Sets variable `D` equal to the value of `S` |
+| `stl` | `D` | `S` | | Sets variable `D` equal to the length of `S` |
+| `stnb` | `D` | `S` | `N` | Sets variable `D` equal to the `N`th bit of `S` |
+| `iadd` | `D` | `S` | | Sets variable `D` equal to the value of `D + S` |
+| `isub` | `D` | `S` | | Sets variable `D` equal to the value of `D - S` |
+| `badd` | `D` | `S` | | Sets one-bit variable `D` equal to the value of the binary sum of one-bit `D` and one-bit `S`; sets `CARRY` flag |
+| `bsub` | `D` | `S` | | Sets one-bit variable `D` equal to the value of the binary subtraction of one-bit `D` and one-bit `S`; sets the `UNDERFLOW` flag |
+| `bsr` | `D` | `S` | | Sets variable `D` equal to the value of `D << S` |
+| `bsl` | `D` | `S` | | Sets variable `D` equal to the value of `D >> S` |
+| `cmp` | `A` | `B` | | Sets the `EQUAL` flag if `A == B` ; sets the `GREATER` flag if `A > B` |
 | `clf` | | | | Clears all flags |
-| `jmp` | `less` | | | Jumps to line less |
-| `jon` | `c` | | | Jumps over the next instruction if the condition c is true |
+| `jmp` | `L` | | | Jumps to line `L` |
+| `jon` | `C` | | | Jumps over the next instruction if the condition `C` is true |
 | `end` | | | | Ends the program |
 
 ### Variables
