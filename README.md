@@ -10,8 +10,22 @@ sh install.sh
 
 ## Usage
 
+### Munin
+
 ```
-./munin -a [0, 1, 2, 3] -p [0, 1]
+./munin -f path_to_munin_assembly_file -i input input input
+```
+
+### Munin assembler
+
+```
+./munin-compiler -f path_to_munin_super_basic_file -o path_to_munin_assembly_output
+```
+
+### Example algorithms
+
+```
+./munin-examples -a [0, 1, 2, 3] -p [0, 1]
 ```
 
 | `-a` value | algorithm |
