@@ -6,14 +6,14 @@ use std::{
 };
 
 
-pub struct Compiler
+pub struct Assembler
 {
     pub jump_points:    HashMap<String, usize>,
     pub program_lines:  Vec<String>,
     pub line_number:    usize,
 }
 
-impl Compiler
+impl Assembler
 {
     pub fn new() -> Self
     {
@@ -57,7 +57,7 @@ impl Compiler
 
             match tokens[0]
             {
-                "declare-jump-point" =>
+                "label" =>
                 {
                     let name = tokens[1];
                     self.jump_points.insert(name.to_owned(), line_number);
@@ -82,11 +82,11 @@ impl Compiler
             let asm_code: String = match tokens[0]
             {
                 ""=>{
-                    "do-nothing".to_string()
+                    "non".to_string()
                 }
-                "declare-jump-point" =>
+                "label" =>
                 {
-                    "do-nothing".to_string()
+                    "non".to_string()
                 }
                 "set" =>
                 {
@@ -142,7 +142,17 @@ impl Compiler
                 {
                     let destination = tokens[3];
                     let source = tokens[1];
-                    format!("bsub {destination} {source}")
+                    let borrow = tokens[4];
+                    match borrow {
+                        "with-borrow" =>
+                        {
+                            format!("bsbu {destination} {source}")
+                        }
+                        _other =>
+                        {
+                            format!("bsub {destination} {source}")
+                        }
+                    }
                 }
                 "shift"=>
                 {
@@ -178,8 +188,8 @@ impl Compiler
                         "less-or-equal" => {"le"}
                         "carry" => {"c"}
                         "no-carry" => {"nc"}
-                        "underflow" => {"u"}
-                        "no-underflow" => {"nu"}
+                        "borrow" => {"b"}
+                        "no-borrow" => {"nb"}
                         "" => {""}
                         _other => panic!("Invalid flag: {}", tokens[1])
                     };

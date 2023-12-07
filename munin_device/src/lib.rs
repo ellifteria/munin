@@ -10,7 +10,7 @@ const NUM_FLAGS: usize = 4;
 const EQUAL_FLAG: usize = 0;
 const GREATER_FLAG: usize = 1;
 const CARRY_FLAG: usize = 2;
-const UNDERFLOW_FLAG: usize = 3;
+const BORROW_FLAG: usize = 3;
 
 #[derive(PartialEq, Eq)]
 pub enum DeviceState
@@ -152,10 +152,10 @@ impl Device
             "c" => {self.flags[CARRY_FLAG]}
             // no carry
             "nc" => {!self.flags[CARRY_FLAG]}
-            // underflow
-            "u" => {self.flags[UNDERFLOW_FLAG]}
-            // no underflow
-            "nu" => {!self.flags[UNDERFLOW_FLAG]}
+            // borrow
+            "b" => {self.flags[BORROW_FLAG]}
+            // no borrow
+            "nb" => {!self.flags[BORROW_FLAG]}
             // no flag, always perform
             "" => {true}
             _ => panic!("Invalid condition: {}", condition)
@@ -417,7 +417,36 @@ impl Device
 
                 let mut new_value: i32 = (source as i32) -  (destination as i32);
 
-                self.flags[UNDERFLOW_FLAG] =  new_value < 0;
+                self.flags[BORROW_FLAG] =  new_value < 0;
+
+                if new_value < 0
+                {
+                    if new_value < -2 {panic!("Invalid binary subtraction")}
+                    new_value += 2;
+                }
+
+                self.set_destination(operand1, new_value as u32);
+            }
+            "bsbu" =>
+            {
+                let source: u32 = self.get_source_value(operand2);
+
+                if source > 1
+                {
+                    panic!("Invalid value for binary addition: {} at {}", source, operand2);
+                }
+
+                let destination: u32 = self.get_source_value(operand1);
+
+
+                if destination > 1
+                {
+                    panic!("Invalid value for binary addition: {} at {}", destination, operand1);
+                }
+
+                let mut new_value: i32 = (source as i32) -  (destination as i32) - (self.flags[BORROW_FLAG] as i32);
+
+                self.flags[BORROW_FLAG] =  new_value < 0;
 
                 if new_value < 0
                 {
@@ -485,7 +514,7 @@ impl Device
             {
                 self.program_running = false;
             }
-            "do-nothing"=>{}
+            "non"=>{}
             _other =>
             {
                 panic!("Unknown operator: {}", operator);
