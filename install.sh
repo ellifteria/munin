@@ -1,10 +1,9 @@
 cargo build --release
 cp ./target/release/munin* .
 cp ./target/release/example-analysis* .
-cp ./target/release/compiler* .
+cp ./target/release/assembler* .
 rm munin.d
 rm example-analysis.d
-rm compiler.d
+rm assembler.d
 mv example-analysis* munin-examples
-mv compiler* munin-compiler
-
+mv assembler* munin-assembler

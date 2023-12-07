@@ -8,4 +8,4 @@ edition = "2021"
 [dependencies]
 clap = { version = "4.4.10", features = ["derive"] }
 munin_device = {path = "munin_device"}
-munin_compiler = {path = "munin_compiler"}
+munin_assembler = {path = "munin_assembler"}
