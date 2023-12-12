@@ -1,7 +1,7 @@
 stl v0 i0
 set v1 0
 set v2 1
-do-nothing
+non
 badd v2 1
 iadd v1 1
 cmp v1 v0

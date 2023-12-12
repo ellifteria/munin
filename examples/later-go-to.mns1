@@ -3,4 +3,4 @@ go-to skip
 int-add 1 to v0
 int-add 4 to v0
 int-subtract 2 from v0
-declare-jump-point skip
+label skip
