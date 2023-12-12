@@ -97,6 +97,7 @@ pub struct Device
     pub instruction_pointer:    usize,
     pub has_loaded_input:       bool,
     pub device_state:           DeviceState,
+    pub instructions_executed:  u32,
 }
 
 impl Device
@@ -114,6 +115,7 @@ impl Device
             instruction_pointer:    0,
             has_loaded_input:       false,
             device_state:           DeviceState::IdlePhase,
+            instructions_executed:  0,
         }
     }
 
@@ -544,6 +546,7 @@ impl Device
             let instruction_pointer: usize = self.instruction_pointer;
             let instruction: &String = &self.program_lines[instruction_pointer].clone();
             self.execute_instruction(instruction);
+            self.instructions_executed += 1;
         }
     }
 
@@ -556,6 +559,7 @@ impl Device
         }
 
         self.device_state = DeviceState::ExecutionPhase;
+        self.clear_device_execution_memory();
 
         self.instruction_pointer = start_point.unwrap_or(0);
 
@@ -599,6 +603,7 @@ impl Device
         self.write_variables = Vec::<Variable>::new();
         self.write_bits = Vec::<Variable>::new();
         self.flags = [false; NUM_FLAGS];
+        self.instructions_executed = 0;
     }
 
     #[allow(dead_code)]
@@ -679,6 +684,9 @@ impl Device
         eprintln!("{:->12}{:->24}", "+", "");
         eprintln!("{: ^11}| {}",  "INPUT", input_memory);
         eprintln!("{: ^11}| {}",  "EXECUTION", flags + execution_memory);
+        eprintln!(" TIME USAGE");
+        eprintln!("{:->36}","");
+        eprintln!("{: ^11}| {}",  "EXECUTIONS", self.instructions_executed);
     }
 
 }

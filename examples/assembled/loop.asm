@@ -1,6 +1,6 @@
 set v0 0
 set v1 10
-do-nothing
+non
 iadd v0 1
 cmp v0 v1
 jon g
