@@ -1,6 +1,6 @@
 set v0 to 0
 set v1 to 10
-declare-jump-point loop
+label loop
 int-add 1 to v0
 compare v0 to v1
 skip-next-if greater
